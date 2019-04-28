@@ -2,24 +2,20 @@
 'use strict';
 
 angular.module('LunchApp', [])
-.controller('LunchController', DIController);
+.controller('LunchController', LunchController);
 
-DIController.$inject = ['$scope', '$filter'];
-function DIController($scope, $filter) {
-  $scope.name = "Yaakov";
-  $scope.lunchlen=42;
+LunchController.$inject = ['$scope', '$filter'];
+function LunchController($scope, $filter) {
+  $scope.msg="";
+  $scope.lunch_list=""
 
-  $scope.upper = function () {
-    var upCase = $filter('uppercase');
-    $scope.name = upCase($scope.name);
-  };
-   $scope.checkLunchItems=function(){
-     if (typeof $scope.lunch_list == 'undefined') {
-       $scope.msg="Please enter data first";
-        return;
-      }
+  $scope.checkLunchItems=function(){
+    if (typeof $scope.lunch_list == 'undefined') {
+      $scope.msg="Please enter data first";
+      return;
+    }
     var menu=$scope.lunch_list.split(",")
-    if (menu.length==0) {
+    if ($scope.lunch_list=="") {
       $scope.msg="Please enter data first";
     } else if (menu.length<=3) {
       $scope.msg="Enjoy!";
